@@ -1,20 +1,14 @@
+import InformationPerson from "../components/InformationPerson";
+import SkillsForm from "../components/SkillsForm";
+
 function Generator() {
   return (
-    <div>
-      <h2>Informações Pessoais</h2>
+    <form>
+     
+      <InformationPerson />
+      <SkillsForm />
 
-      <div>
-        <label>
-          Título
-          <input type="text" />
-        </label>
-
-        <label>
-          Nome Completo
-          <input type="text" />
-        </label>
-      </div>
-    </div>
+    </form>
   );
 }
 
