@@ -1,27 +1,30 @@
 import { useState } from "react";
 
-
-type Skill = {
+interface Skill {
+  id: string;
   name: string;
   level: string;
-};
+}
+
+const generateUniqueId = () => Math.random().toString(36).substr(2, 9);
 
 function SkillsForm() {
-  // Use o tipo "Skill[]" aqui
   const [skills, setSkills] = useState<Skill[]>([]);
   const [skillName, setSkillName] = useState("");
   const [skillLevel, setSkillLevel] = useState("Iniciante");
 
   const addSkill = () => {
     if (skillName.trim() === "") return;
-    setSkills([...skills, { name: skillName, level: skillLevel }]);
+    setSkills([
+      ...skills,
+      { id: generateUniqueId(), name: skillName, level: skillLevel },
+    ]);
     setSkillName("");
     setSkillLevel("Iniciante");
   };
 
-  const removeSkill = (index: number) => {
-    const newSkills = skills.filter((_, i) => i !== index);
-    setSkills(newSkills);
+  const removeSkill = (idToRemove: string) => {
+    setSkills(skills.filter((skill) => skill.id !== idToRemove));
   };
 
   return (
@@ -48,10 +51,12 @@ function SkillsForm() {
       </div>
 
       <ul>
-        {skills.map((skill, index) => (
-          <li key={index}>
+        {skills.map((skill) => (
+          // Use o ID como a `key`
+          <li key={skill.id}>
             {skill.name} - {skill.level}{" "}
-            <button type="button" onClick={() => removeSkill(index)}>
+            {/* Passe o ID para a função de remover */}
+            <button type="button" onClick={() => removeSkill(skill.id)}>
               Remover
             </button>
           </li>

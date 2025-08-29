@@ -1,4 +1,4 @@
-function InformationPerson() {
+function PersonalInformation() {
   return (
     <>
       <h2>Informações Pessoais</h2>
@@ -44,4 +44,4 @@ function InformationPerson() {
   );
 }
 
-export default InformationPerson;
+export default PersonalInformation;

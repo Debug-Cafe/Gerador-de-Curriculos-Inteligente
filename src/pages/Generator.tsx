@@ -1,12 +1,14 @@
-import InformationPerson from "../components/InformationPerson";
+import PersonalInformation from "../components/PersonalInformation";
 import SkillsForm from "../components/SkillsForm";
+import ExperienceForm from "../components/ExperienceForm";
 
 function Generator() {
   return (
     <form>
      
-      <InformationPerson />
+      <PersonalInformation />
       <SkillsForm />
+      <ExperienceForm />
 
     </form>
   );
