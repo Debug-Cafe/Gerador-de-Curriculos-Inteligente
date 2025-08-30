@@ -8,7 +8,7 @@ function Home() {
         Aqui você pode gerar seu currículo de forma simples, rápida e gratuita!
       </p>
       <Link to="generator">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+        <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rouded">
           Vamos Começar?
         </button>
       </Link>
