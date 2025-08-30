@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from "../pages/Home.tsx";
 import Generator from "../pages/Generator.tsx";
-import Visualizer from "../pages/Visualizer.tsx";
+import Visualizer from "../components/Visualizer.tsx";
 
 const router = createBrowserRouter([
   {

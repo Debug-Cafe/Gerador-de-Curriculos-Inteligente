@@ -42,7 +42,7 @@ function ExperienceForm() {
     <div>
       <h2>Experiências Profissionais</h2>
 
-      <div>
+      <div className="flex flex-col">
         <input
           type="text"
           placeholder="Cargo"

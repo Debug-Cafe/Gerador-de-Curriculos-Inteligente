@@ -1,16 +1,16 @@
-import PersonalInformation from "../components/PersonalInformation";
-import SkillsForm from "../components/SkillsForm";
-import ExperienceForm from "../components/ExperienceForm";
+import GeneratorForm from "../components/GeneratorForm";
+import Visualizer from "../components/Visualizer";
 
 function Generator() {
   return (
-    <form>
-     
-      <PersonalInformation />
-      <SkillsForm />
-      <ExperienceForm />
-
-    </form>
+    <div className="flex">
+      <div className="w-1/2">
+        <GeneratorForm />
+      </div>
+      <div className="w-1/2">
+        <Visualizer />
+      </div>
+    </div>
   );
 }
 
