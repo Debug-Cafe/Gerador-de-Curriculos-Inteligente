@@ -3,28 +3,28 @@ import { useState } from "react";
 interface Skill {
   id: string;
   name: string;
-  level: string;
+  level: "Básico" | "Intermediário" | "Avançado";
+}
+
+interface SkillsFormProps {
+  skillsList: Skill[];
+  onAddSkill: (newSkill: Omit<Skill, 'id'>) => void;
+  onRemoveSkill: (idToRemove: string) => void;
 }
 
 const generateUniqueId = () => Math.random().toString(36).substr(2, 9);
 
-function SkillsForm() {
-  const [skills, setSkills] = useState<Skill[]>([]);
+function SkillsForm({ skillsList, onAddSkill, onRemoveSkill }: SkillsFormProps) {
   const [skillName, setSkillName] = useState("");
-  const [skillLevel, setSkillLevel] = useState("Iniciante");
+  const [skillLevel, setSkillLevel] = useState<"Básico" | "Intermediário" | "Avançado">("Básico");
 
-  const addSkill = () => {
+  const handleAddClick = () => {
     if (skillName.trim() === "") return;
-    setSkills([
-      ...skills,
-      { id: generateUniqueId(), name: skillName, level: skillLevel },
-    ]);
-    setSkillName("");
-    setSkillLevel("Iniciante");
-  };
+    
+    onAddSkill({ name: skillName, level: skillLevel });
 
-  const removeSkill = (idToRemove: string) => {
-    setSkills(skills.filter((skill) => skill.id !== idToRemove));
+    setSkillName("");
+    setSkillLevel("Básico");
   };
 
   return (
@@ -39,24 +39,22 @@ function SkillsForm() {
         />
         <select
           value={skillLevel}
-          onChange={(e) => setSkillLevel(e.target.value)}
+          onChange={(e) => setSkillLevel(e.target.value as "Básico" | "Intermediário" | "Avançado")}
         >
-          <option>Iniciante</option>
+          <option>Básico</option>
           <option>Intermediário</option>
           <option>Avançado</option>
         </select>
-        <button type="button" onClick={addSkill}>
+        <button type="button" onClick={handleAddClick}>
           Adicionar
         </button>
       </div>
 
       <ul>
-        {skills.map((skill) => (
-          // Use o ID como a `key`
+        {skillsList.map((skill) => (
           <li key={skill.id}>
             {skill.name} - {skill.level}{" "}
-            {/* Passe o ID para a função de remover */}
-            <button type="button" onClick={() => removeSkill(skill.id)}>
+            <button type="button" onClick={() => onRemoveSkill(skill.id)}>
               Remover
             </button>
           </li>

@@ -1,93 +1,86 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 
+// Interface para a Experiência
 interface Experience {
-  id: string;  
-  role: string;
+  id: string;
   company: string;
-  startDate: string;
-  endDate: string;
+  position: string;
+  period: string;
   description: string;
 }
 
-const generateUniqueId = () => Math.random().toString(36).substr(2, 9);
+// Interface para as props do componente
+interface ExperienceFormProps {
+  experiencesList: Experience[];
+  onAddExperience: (newExperience: Omit<Experience, 'id'>) => void;
+  onRemoveExperience: (idToRemove: string) => void;
+}
 
-function ExperienceForm() {
-  const [experiences, setExperiences] = useState<Experience[]>([]);
-  const [role, setRole] = useState("");
+function ExperienceForm({ experiencesList, onAddExperience, onRemoveExperience }: ExperienceFormProps) {
   const [company, setCompany] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [position, setPosition] = useState("");
+  const [period, setPeriod] = useState("");
   const [description, setDescription] = useState("");
 
-  const addExperience = () => {
-    if (role.trim() === "" || company.trim() === "") return;
+  const handleAddClick = () => {
+    if (company.trim() === "" || position.trim() === "") return;
 
-    setExperiences([
-      ...experiences,
-      { id: generateUniqueId(), role, company, startDate, endDate, description },
-    ]);
+    // Cria o novo objeto de experiência sem o ID
+    const newExperience = { company, position, period, description };
 
-    setRole("");
+    // Chama a função do componente pai para atualizar o estado
+    onAddExperience(newExperience);
+
+    // Limpa os campos do formulário para o próximo item
     setCompany("");
-    setStartDate("");
-    setEndDate("");
+    setPosition("");
+    setPeriod("");
     setDescription("");
   };
 
-  const removeExperience = (idToRemove: string) => {
-  setExperiences(experiences.filter((exp) => exp.id !== idToRemove));
-};
-
   return (
-    <div>
-      <h2>Experiências Profissionais</h2>
-
-      <div className="flex flex-col">
+    <div className="flex-col">
+      <h2 className="text-xl font-bold mt-4">Experiências Profissionais</h2>
+      <div className="flex flex-col gap-2 mt-2">
         <input
           type="text"
-          placeholder="Cargo"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-        />
-
-        <input
-          type="text"
+          name="company"
           placeholder="Empresa"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
-
         <input
-          type="month"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          type="text"
+          name="position"
+          placeholder="Cargo"
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
         />
-
         <input
-          type="month"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          type="text"
+          name="period"
+          placeholder="Período"
+          value={period}
+          onChange={(e) => setPeriod(e.target.value)}
         />
-
         <textarea
-          placeholder="Descrição das atividades"
+          name="description"
+          placeholder="Descrição das responsabilidades"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          className="w-full h-20"
         />
-
-        <button type="button" onClick={addExperience}>
+        <button type="button" onClick={handleAddClick} className="w-fit">
           Adicionar Experiência
         </button>
       </div>
 
-      <ul>
-        {experiences.map((exp) => (
-          <li key={exp.id}>
-            <strong>{exp.role}</strong> - {exp.company} <br />
-            {exp.startDate} até {exp.endDate || "Atual"} <br />
-            <em>{exp.description}</em>
-            <br />
-            <button type="button" onClick={() => removeExperience(exp.id)}>
+      <ul className="list-disc list-inside mt-4">
+        {experiencesList.map((exp) => (
+          <li key={exp.id} className="text-gray-700">
+            <span className="font-medium">{exp.position}</span> em {exp.company} ({exp.period})
+            <p className="text-sm italic">{exp.description}</p>
+            <button type="button" onClick={() => onRemoveExperience(exp.id)} className="ml-2 text-red-500">
               Remover
             </button>
           </li>
