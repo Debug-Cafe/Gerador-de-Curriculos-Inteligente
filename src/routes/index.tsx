@@ -1,8 +1,4 @@
-import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 import Home from "../pages/Home.tsx";
 import Generator from "../pages/Generator.tsx";
@@ -22,11 +18,5 @@ const router = createBrowserRouter([
     element: <Visualizer />,
   },
 ]);
-
-const root = document.getElementById("root") as HTMLElement;
-
-ReactDOM.createRoot(root).render(
-  <RouterProvider router={router} />,
-);
 
 export default router;
