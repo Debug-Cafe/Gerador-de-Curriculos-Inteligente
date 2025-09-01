@@ -1,15 +1,9 @@
-import GeneratorForm from "../components/GeneratorForm";
+import ResumeForm from "../components/ResumeForm";
 
-function Generator() {
+export default function Generator() {
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2">
-        <GeneratorForm />
-      </div>
-      <div className="w-1/2">
-      </div>
+    <div className="w-full min-h-screen">
+      <ResumeForm />
     </div>
   );
 }
-
-export default Generator;
