@@ -1,17 +1,9 @@
-import PersonalInformation from "../components/PersonalInformation";
-import SkillsForm from "../components/SkillsForm";
-import ExperienceForm from "../components/ExperienceForm";
+import ResumeForm from "../components/ResumeForm";
 
-function Generator() {
+export default function Generator() {
   return (
-    <form>
-     
-      <PersonalInformation />
-      <SkillsForm />
-      <ExperienceForm />
-
-    </form>
+    <div className="w-full min-h-screen">
+      <ResumeForm />
+    </div>
   );
 }
-
-export default Generator;
